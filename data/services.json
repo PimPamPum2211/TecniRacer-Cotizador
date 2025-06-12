@@ -1,0 +1,14 @@
+[
+  {
+    "id": "oil-change",
+    "name": "Cambio de Aceite",
+    "icon": "/icons/oil.svg",
+    "basePrice": 500
+  },
+  {
+    "id": "tire-rotation",
+    "name": "Rotación de Llantas",
+    "icon": "/icons/tires.svg",
+    "basePrice": 300
+  }
+]
