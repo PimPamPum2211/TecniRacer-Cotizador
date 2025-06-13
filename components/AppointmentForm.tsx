@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from './Button';
 
 interface Props {
   serviceId: string;
@@ -10,8 +11,15 @@ export const AppointmentForm: React.FC<Props> = ({ serviceId, onSuccess }) => {
   const [phone, setPhone] = useState('');
   const [scheduled, setScheduled] = useState('');
 
+  const [errors, setErrors] = useState<string | null>(null);
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!/^[0-9]{7,}$/.test(phone)) {
+      setErrors('Teléfono inválido');
+      return;
+    }
+    setErrors(null);
     await fetch('/api/appointment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -45,9 +53,10 @@ export const AppointmentForm: React.FC<Props> = ({ serviceId, onSuccess }) => {
         onChange={(e) => setScheduled(e.target.value)}
         required
       />
-      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded w-full">
+      {errors && <p className="text-red-600 text-sm">{errors}</p>}
+      <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">
         Agendar
-      </button>
+      </Button>
     </form>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppointmentForm } from './AppointmentForm';
+import { Button } from './Button';
 
 interface Props {
   visible: boolean;
@@ -14,9 +15,9 @@ export const AppointmentModal: React.FC<Props> = ({ visible, serviceId, onClose 
       <div className="bg-white p-6 rounded-xl shadow w-80">
         <h2 className="text-lg font-semibold mb-4">Agendar Servicio</h2>
         <AppointmentForm serviceId={serviceId} onSuccess={onClose} />
-        <button onClick={onClose} className="mt-4 bg-gray-200 px-4 py-2 rounded w-full">
+        <Button onClick={onClose} className="mt-4 bg-gray-200 text-gray-800 hover:bg-gray-300 w-full">
           Cancelar
-        </button>
+        </Button>
       </div>
     </div>
   );

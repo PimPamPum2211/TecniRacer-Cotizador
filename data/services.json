@@ -3,12 +3,14 @@
     "id": "oil-change",
     "name": "Cambio de Aceite",
     "icon": "/icons/oil.svg",
+    "image": "/images/oil-change.svg",
     "basePrice": 500
   },
   {
     "id": "tire-rotation",
     "name": "Rotación de Llantas",
     "icon": "/icons/tires.svg",
+    "image": "/images/tire-rotation.svg",
     "basePrice": 300
   }
 ]

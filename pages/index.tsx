@@ -5,6 +5,7 @@ import { Carousel } from '../components/Carousel';
 import { CategoryTabs } from '../components/CategoryTabs';
 import { QuoteModal } from '../components/QuoteModal';
 import { AppointmentModal } from '../components/AppointmentModal';
+import { useQuotes } from '../lib/QuotesContext';
 
 const categories = ['Mantenimientos', 'Diagnóstico'];
 
@@ -13,6 +14,7 @@ export default function Home() {
   const [quotePrice, setQuotePrice] = useState<number | null>(null);
   const [quoteVisible, setQuoteVisible] = useState(false);
   const [scheduleServiceId, setScheduleServiceId] = useState<string | null>(null);
+  const { addQuote } = useQuotes();
 
   const quote = async (id: string) => {
     setQuoteVisible(true);
@@ -23,6 +25,13 @@ export default function Home() {
     });
     const data = await res.json();
     setQuotePrice(data.price);
+    addQuote({
+      id: data.quoteId,
+      price: data.price,
+      serviceId: id,
+      createdAt: new Date().toISOString(),
+      serviceName: services.find((s) => s.id === id)?.name || id,
+    });
   };
 
   const schedule = (id: string) => {
@@ -34,10 +43,11 @@ export default function Home() {
       <CategoryTabs categories={categories} active={activeCat} onChange={setActiveCat} />
       <Carousel>
         {services.map((s) => (
-          <div key={s.id} className="w-48">
+          <div key={s.id} className="w-60 sm:w-72">
             <ServiceCard
               name={s.name}
               icon={s.icon}
+              image={s.image}
               price={s.basePrice}
               onQuote={() => quote(s.id)}
               onSchedule={() => schedule(s.id)}

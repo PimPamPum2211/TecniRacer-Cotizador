@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from './Button';
 
 interface Props {
   visible: boolean;
@@ -10,14 +11,18 @@ export const QuoteModal: React.FC<Props> = ({ visible, price, onClose }) => {
   if (!visible) return null;
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-xl shadow">
+      <div className="bg-white p-6 rounded-xl shadow w-80">
         <h2 className="text-lg font-semibold mb-4">Cotización</h2>
-        <p className="mb-4">
+        <ol className="flex justify-between mb-4 text-sm">
+          <li className="flex-1 text-center">1. Solicitud</li>
+          <li className="flex-1 text-center">2. Resultado</li>
+        </ol>
+        <p className="mb-4 text-center">
           {price !== null ? `El precio es $${price}` : 'Calculando...'}
         </p>
-        <button onClick={onClose} className="bg-blue-500 text-white px-4 py-2 rounded">
-          Cerrar
-        </button>
+        <div className="text-center">
+          <Button onClick={onClose}>Cerrar</Button>
+        </div>
       </div>
     </div>
   );
