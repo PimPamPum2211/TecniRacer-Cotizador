@@ -1,0 +1,33 @@
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Build artifacts
+build/
+dist/
+
+# Environment files
+.env*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Coverage directory
+coverage/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Misc
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
