@@ -9,15 +9,27 @@ export const AppointmentForm: React.FC<Props> = ({ serviceId, onSuccess }) => {
   const [customer, setCustomer] = useState('');
   const [phone, setPhone] = useState('');
   const [scheduled, setScheduled] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await fetch('/api/appointment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ serviceId, customer, phone, scheduled })
-    });
-    onSuccess();
+    setLoading(true);
+    setMessage('');
+    try {
+      const res = await fetch('/api/appointment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ serviceId, customer, phone, scheduled })
+      });
+      if (!res.ok) throw new Error('Request failed');
+      setMessage('Agendado correctamente');
+      onSuccess();
+    } catch (err) {
+      setMessage('Error al agendar');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,9 +57,10 @@ export const AppointmentForm: React.FC<Props> = ({ serviceId, onSuccess }) => {
         onChange={(e) => setScheduled(e.target.value)}
         required
       />
-      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded w-full">
-        Agendar
+      <button type="submit" disabled={loading} className="bg-green-500 text-white px-4 py-2 rounded w-full disabled:opacity-50">
+        {loading ? 'Agendando...' : 'Agendar'}
       </button>
+      {message && <p className="text-center text-sm">{message}</p>}
     </form>
   );
 };

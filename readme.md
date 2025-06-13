@@ -20,6 +20,7 @@ Aplicación web para cotizar y agendar servicios de taller automotriz.
 
 1. Instala las dependencias con `npm install`.
 2. Copia el archivo `.env.example` a `.env` y actualiza `DATABASE_URL` con tu cadena de conexión.
+   También puedes definir `PRISMA_LOG_QUERIES=true` para habilitar el registro de consultas.
 3. Ejecuta las migraciones de Prisma con `npx prisma migrate dev`.
 4. Ejecuta `npx prisma db seed` para poblar la tabla de servicios.
 5. Inicia el servidor de desarrollo usando `npm run dev`.
