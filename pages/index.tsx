@@ -45,6 +45,7 @@ export default function Home() {
         {services.map((s) => (
           <div key={s.id} className="w-60 sm:w-72">
             <ServiceCard
+              id={s.id}
               name={s.name}
               icon={s.icon}
               image={s.image}
