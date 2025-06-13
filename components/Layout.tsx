@@ -5,6 +5,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   <div className="min-h-screen flex flex-col">
     <nav className="bg-blue-600 text-white p-4 flex gap-4">
       <Link href="/" className="font-semibold">Inicio</Link>
+      <Link href="/maintenance">Mantenimientos</Link>
       <Link href="/history">Historial</Link>
       <Link href="/cart">Carrito</Link>
     </nav>
