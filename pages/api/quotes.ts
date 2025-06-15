@@ -5,7 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== 'GET') return res.status(405).end();
 
   const quotes = await prisma.quote.findMany({
-    include: { service: true },
+    include: { service: true, customer: true },
     orderBy: { createdAt: 'desc' }
   });
 
@@ -15,7 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       serviceId: q.serviceId,
       price: q.price,
       createdAt: q.createdAt,
-      serviceName: q.service.name
+      serviceName: q.service.name,
+      customer: q.customer ? q.customer.name : null
     }))
   );
 }

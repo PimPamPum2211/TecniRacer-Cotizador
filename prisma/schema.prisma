@@ -7,6 +7,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Customer {
+  id    String  @id @default(cuid())
+  name  String
+  phone String  @unique
+  quotes Quote[]
+  appointments Appointment[]
+}
+
 model Service {
   id        String  @id
   name      String
@@ -18,19 +26,23 @@ model Service {
 }
 
 model Quote {
-  id        String   @id @default(cuid())
-  serviceId String
-  price     Int
-  createdAt DateTime @default(now())
-  service   Service  @relation(fields: [serviceId], references: [id])
+  id         String   @id @default(cuid())
+  serviceId  String
+  customerId String?
+  price      Int
+  createdAt  DateTime @default(now())
+  service    Service  @relation(fields: [serviceId], references: [id])
+  customer   Customer? @relation(fields: [customerId], references: [id])
 }
 
 model Appointment {
   id         String   @id @default(cuid())
   serviceId  String
+  customerId String
   customer   String
   phone      String
   scheduled  DateTime
   createdAt  DateTime @default(now())
   service    Service  @relation(fields: [serviceId], references: [id])
+  customerRef Customer @relation(fields: [customerId], references: [id])
 }

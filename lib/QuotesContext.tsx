@@ -6,6 +6,7 @@ export interface Quote {
   price: number;
   createdAt: string;
   serviceName: string;
+  customer?: string;
 }
 
 interface QuoteState {

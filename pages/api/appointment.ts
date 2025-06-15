@@ -18,10 +18,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Invalid phone' });
   }
 
+  const customerRecord = await prisma.customer.upsert({
+    where: { phone },
+    update: { name: customer },
+    create: { name: customer, phone }
+  });
+
   const appointment = await prisma.appointment.create({
     data: {
       serviceId,
       customer,
+      customerId: customerRecord.id,
       phone,
       scheduled: new Date(scheduled)
     }

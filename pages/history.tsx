@@ -22,6 +22,9 @@ export default function History() {
           <li key={q.id} className="border p-2 rounded">
             <p className="font-medium">{q.serviceName}</p>
             <p className="text-sm text-gray-600">${q.price} - {new Date(q.createdAt).toLocaleString()}</p>
+            {q.customer && (
+              <p className="text-sm text-gray-600">Cliente: {q.customer}</p>
+            )}
           </li>
         ))}
       </ul>

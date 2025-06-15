@@ -15,6 +15,12 @@ async function main() {
       },
     });
   }
+
+  await prisma.customer.upsert({
+    where: { phone: '5551234' },
+    update: {},
+    create: { name: 'Ejemplo', phone: '5551234' }
+  });
 }
 
 main()
