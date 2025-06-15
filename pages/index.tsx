@@ -17,6 +17,7 @@ export default function Home() {
   const { addQuote } = useQuotes();
 
   const quote = async (id: string) => {
+    setQuotePrice(null);
     setQuoteVisible(true);
     const res = await fetch('/api/quote', {
       method: 'POST',

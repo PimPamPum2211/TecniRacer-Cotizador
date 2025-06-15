@@ -5,14 +5,14 @@ import { useQuotes, Quote } from '../lib/QuotesContext';
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function History() {
-  const { quotes, addQuote } = useQuotes();
+  const { quotes, addQuote, setQuotes } = useQuotes();
   const { data } = useSWR<Quote[]>('/api/quotes', fetcher);
 
   useEffect(() => {
     if (data) {
-      data.forEach((q) => addQuote(q));
+      setQuotes(data);
     }
-  }, [data]);
+  }, [data, setQuotes]);
 
   return (
     <div>

@@ -14,6 +14,7 @@ export default function Maintenance() {
   const items = services.filter((s) => s.category === 'Mantenimientos');
 
   const quote = async (id: string) => {
+    setQuotePrice(null);
     setQuoteVisible(true);
     const res = await fetch('/api/quote', {
       method: 'POST',
