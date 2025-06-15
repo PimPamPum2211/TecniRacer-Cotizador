@@ -1,8 +1,10 @@
 import { useCart } from '../lib/CartContext';
 import { Button } from '../components/Button';
+import { useRouter } from 'next/router';
 
 export default function Cart() {
   const { items, removeItem, clear } = useCart();
+  const router = useRouter();
   const total = items.reduce((sum, i) => sum + i.price, 0);
 
   if (items.length === 0) {
@@ -27,8 +29,11 @@ export default function Cart() {
       </ul>
       <p className="mt-4 font-semibold">Total: ${total}</p>
       <div className="mt-4 flex gap-2">
-        <Button className="bg-green-600 hover:bg-green-700" onClick={clear}>
-          Confirmar (demo)
+        <Button
+          className="bg-green-600 hover:bg-green-700"
+          onClick={() => router.push('/vehicle?cart=1')}
+        >
+          Pagar
         </Button>
         <Button className="bg-gray-200 text-gray-800 hover:bg-gray-300" onClick={clear}>
           Vaciar

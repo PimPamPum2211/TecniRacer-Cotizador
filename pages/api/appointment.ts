@@ -2,16 +2,31 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../lib/prisma';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === 'GET') {
+    const { plate, document } = req.query as { plate?: string; document?: string };
+    if (!plate || !document) {
+      return res.status(400).json({ error: 'Missing fields' });
+    }
+    const appointment = await prisma.appointment.findFirst({
+      where: { plate, document },
+      include: { service: true }
+    });
+    if (!appointment) return res.status(404).end();
+    return res.json(appointment);
+  }
+
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { serviceId, customer, phone, scheduled } = req.body as {
+  const { serviceId, customer, phone, plate, document, scheduled } = req.body as {
     serviceId?: string;
     customer?: string;
     phone?: string;
+    plate?: string;
+    document?: string;
     scheduled?: string;
   };
 
-  if (!serviceId || !customer || !phone || !scheduled) {
+  if (!serviceId || !customer || !phone || !plate || !document || !scheduled) {
     return res.status(400).json({ error: 'Missing fields' });
   }
   if (!/^[0-9]{7,}$/.test(phone)) {
@@ -30,6 +45,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       customer,
       customerId: customerRecord.id,
       phone,
+      plate,
+      document,
       scheduled: new Date(scheduled)
     }
   });

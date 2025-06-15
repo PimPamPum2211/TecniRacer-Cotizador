@@ -3,8 +3,7 @@ import { ServiceCard } from '../../components/ServiceCard';
 import { CartProvider } from '../../lib/CartContext';
 
 describe('ServiceCard', () => {
-  it('calls provided callbacks', () => {
-    const onQuote = jest.fn();
+  it('calls schedule callback', () => {
     const onSchedule = jest.fn();
     render(
       <CartProvider>
@@ -14,16 +13,12 @@ describe('ServiceCard', () => {
           icon=""
           image=""
           price={100}
-          onQuote={onQuote}
           onSchedule={onSchedule}
         />
       </CartProvider>
     );
 
-    fireEvent.click(screen.getByText('Cotizar'));
     fireEvent.click(screen.getByText('Agendar'));
-
-    expect(onQuote).toHaveBeenCalled();
     expect(onSchedule).toHaveBeenCalled();
   });
 });
