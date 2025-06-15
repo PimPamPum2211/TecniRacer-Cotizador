@@ -14,7 +14,8 @@ interface Props {
 }
 
 export const ServiceCard: React.FC<Props> = ({ id, name, icon, image, price, onQuote, onSchedule }) => {
-  const { addItem } = useCart();
+  const { items, addItem } = useCart();
+  const hasCart = items.length > 0;
 
   return (
     <div className="bg-white rounded-xl shadow hover:shadow-md transition flex flex-col items-center">
@@ -25,10 +26,14 @@ export const ServiceCard: React.FC<Props> = ({ id, name, icon, image, price, onQ
       <h3 className="font-semibold mt-2 text-center">{name}</h3>
       <p className="text-sm mb-2">{`Desde $${price}`}</p>
       <div className="flex gap-2 mt-auto pb-2 flex-wrap justify-center">
-        <Button onClick={onQuote}>Cotizar</Button>
-        <Button onClick={onSchedule} className="bg-green-600 hover:bg-green-700">
-          Agendar
-        </Button>
+        {!hasCart && (
+          <>
+            <Button onClick={onQuote}>Cotizar</Button>
+            <Button onClick={onSchedule} className="bg-green-600 hover:bg-green-700">
+              Agendar
+            </Button>
+          </>
+        )}
         <Button onClick={() => addItem({ id, name, price })} className="bg-orange-600 hover:bg-orange-700">
           Agregar
         </Button>
