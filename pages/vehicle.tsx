@@ -10,7 +10,8 @@ export default function Vehicle() {
 
   const [customer, setCustomer] = useState('');
   const [phone, setPhone] = useState('');
-  const [vehicle, setVehicle] = useState('');
+  const [plate, setPlate] = useState('');
+  const [document, setDocument] = useState('');
   const [scheduled, setScheduled] = useState('');
 
   const submit = async (e: React.FormEvent) => {
@@ -25,6 +26,8 @@ export default function Vehicle() {
             serviceId: s.id,
             customer,
             phone,
+            plate,
+            document,
             scheduled
           })
         })
@@ -57,9 +60,17 @@ export default function Vehicle() {
         <input
           type="text"
           className="border rounded w-full p-2"
-          placeholder="Vehículo"
-          value={vehicle}
-          onChange={(e) => setVehicle(e.target.value)}
+          placeholder="Placa"
+          value={plate}
+          onChange={(e) => setPlate(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          className="border rounded w-full p-2"
+          placeholder="Cédula"
+          value={document}
+          onChange={(e) => setDocument(e.target.value)}
           required
         />
         <input
