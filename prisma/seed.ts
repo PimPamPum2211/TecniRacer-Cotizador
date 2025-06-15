@@ -10,10 +10,17 @@ async function main() {
         id: service.id,
         name: service.name,
         icon: service.icon,
+        image: service.image,
         basePrice: service.basePrice,
       },
     });
   }
+
+  await prisma.customer.upsert({
+    where: { phone: '5551234' },
+    update: {},
+    create: { name: 'Ejemplo', phone: '5551234' }
+  });
 }
 
 main()

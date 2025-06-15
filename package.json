@@ -20,9 +20,11 @@
     "prisma": "^5.9.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "swr": "^2.3.3",
     "tailwindcss": "^3.3.5"
   },
   "devDependencies": {
+    "@types/react": "19.1.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2"
   }

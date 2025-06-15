@@ -3,12 +3,80 @@
     "id": "oil-change",
     "name": "Cambio de Aceite",
     "icon": "/icons/oil.svg",
-    "basePrice": 500
+    "image": "/images/oil-change.svg",
+    "basePrice": 500,
+    "category": "Mantenimientos"
   },
   {
     "id": "tire-rotation",
     "name": "Rotación de Llantas",
     "icon": "/icons/tires.svg",
-    "basePrice": 300
+    "image": "/images/tire-rotation.svg",
+    "basePrice": 300,
+    "category": "Mantenimientos"
+  },
+  {
+    "id": "brake-inspection",
+    "name": "Revisión de Frenos",
+    "icon": "/icons/brakes.svg",
+    "image": "/images/brake-inspection.svg",
+    "basePrice": 400,
+    "category": "Mantenimientos"
+  },
+  {
+    "id": "battery-replacement",
+    "name": "Cambio de Batería",
+    "icon": "/icons/battery.svg",
+    "image": "/images/battery-replacement.svg",
+    "basePrice": 1200,
+    "category": "Mantenimientos"
+  },
+  {
+    "id": "air-filter",
+    "name": "Reemplazo de Filtro de Aire",
+    "icon": "/icons/filter.svg",
+    "image": "/images/air-filter-replacement.svg",
+    "basePrice": 250,
+    "category": "Mantenimientos"
+  },
+  {
+    "id": "engine-diagnosis",
+    "name": "Diagnóstico de Motor",
+    "icon": "/icons/engine.svg",
+    "image": "/images/engine-diagnosis.svg",
+    "basePrice": 800,
+    "category": "Diagnóstico"
+  },
+  {
+    "id": "transmission-service",
+    "name": "Servicio de Transmisión",
+    "icon": "/icons/transmission.svg",
+    "image": "/images/transmission-service.svg",
+    "basePrice": 1500,
+    "category": "Mantenimientos"
+  },
+  {
+    "id": "coolant-flush",
+    "name": "Cambio de Anticongelante",
+    "icon": "/icons/coolant.svg",
+    "image": "/images/coolant-flush.svg",
+    "basePrice": 600,
+    "category": "Mantenimientos"
+  },
+  {
+    "id": "wheel-alignment",
+    "name": "Alineación de Ruedas",
+    "icon": "/icons/alignment.svg",
+    "image": "/images/wheel-alignment.svg",
+    "basePrice": 550,
+    "category": "Diagnóstico"
+  },
+  {
+    "id": "suspension-check",
+    "name": "Inspección de Suspensión",
+    "icon": "/icons/suspension.svg",
+    "image": "/images/suspension-check.svg",
+    "basePrice": 700,
+    "category": "Diagnóstico"
   }
 ]
