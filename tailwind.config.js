@@ -4,6 +4,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}'
   ],
+  safelist: ['grid-cols-mosaic'],
   theme: {
     extend: {
       colors: {
@@ -11,7 +12,7 @@ module.exports = {
         'brand-blue': '#003E7E',
       },
       gridTemplateColumns: {
-        mosaic: 'repeat(auto-fill, minmax(260px,1fr))',
+        mosaic: 'repeat(auto-fill, minmax(200px,1fr))',
       },
     },
   },
