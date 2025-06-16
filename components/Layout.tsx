@@ -10,7 +10,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <Link href="/cart">Carrito</Link>
       <Link href="/lookup">Consultar</Link>
     </nav>
-    <main className="flex-1 p-4">{children}</main>
+    <main className="flex-1 p-4 max-w-screen-xl mx-auto">{children}</main>
     <footer className="bg-gray-100 text-center p-4 text-sm">TecniRacer 2024</footer>
   </div>
 );
