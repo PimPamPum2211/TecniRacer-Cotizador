@@ -8,13 +8,13 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: React.FC<Props> = ({ children, variant, className = '', ...rest }) => {
   const variantClass =
     variant === 'primary'
-      ? 'bg-brand-red text-white hover:bg-brand-red/90'
+      ? 'bg-secondary-500 text-white hover:bg-secondary-600'
       : variant === 'secondary'
-      ? 'bg-brand-blue text-white hover:bg-brand-blue/90'
+      ? 'bg-primary-600 text-white hover:bg-primary-700'
       : variant === 'outline'
-      ? 'border-2 border-brand-blue text-brand-blue hover:bg-brand-blue/10'
+      ? 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50'
       : variant === 'ghost'
-      ? 'text-brand-blue hover:bg-brand-blue/10'
+      ? 'text-primary-600 hover:bg-primary-50'
       : '';
   return (
     <button

@@ -3,7 +3,7 @@ import React from 'react';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="min-h-screen flex flex-col">
-    <nav className="bg-brand-red text-white p-4 flex gap-4">
+    <nav className="bg-secondary-500 text-white p-4 flex gap-4">
       <Link href="/" className="font-semibold">Inicio</Link>
       <Link href="/maintenance">Mantenimientos</Link>
       <Link href="/history">Historial</Link>
