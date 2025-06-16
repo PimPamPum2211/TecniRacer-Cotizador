@@ -12,10 +12,10 @@ export const CategoryTabs: React.FC<Props> = ({ categories, active, onChange }) 
       <button
         key={c}
         onClick={() => onChange(c)}
-        className={`px-4 py-2 rounded-full whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand-blue/40 ${
+        className={`px-4 py-2 rounded-full whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary-400 ${
           c === active
-            ? 'bg-brand-blue text-white'
-            : 'bg-gray-200 text-brand-blue'
+            ? 'bg-primary-600 text-white'
+            : 'bg-gray-200 text-primary-600'
         }`}
       >
         {c}
