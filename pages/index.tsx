@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import services from '../data/services.json';
-import ServiceCard from '../components/ServiceCard';
+import { ServiceCard } from '../components/ServiceCard';
 import { Carousel } from '../components/Carousel';
 import { CategoryTabs } from '../components/CategoryTabs';
 import { useRouter } from 'next/router';
@@ -24,10 +24,12 @@ export default function Home() {
           .map((s) => (
           <div key={s.id} className="w-60 sm:w-72">
             <ServiceCard
+              id={s.id}
               name={s.name}
+              icon={s.icon}
               image={s.image}
               price={s.basePrice}
-              onBook={() => schedule(s.id)}
+              onSchedule={() => schedule(s.id)}
             />
           </div>
         ))}

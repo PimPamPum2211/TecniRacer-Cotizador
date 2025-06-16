@@ -1,19 +1,24 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import ServiceCard from '../../components/ServiceCard';
+import { ServiceCard } from '../../components/ServiceCard';
+import { CartProvider } from '../../lib/CartContext';
 
 describe('ServiceCard', () => {
-  it('calls book callback', () => {
-    const onBook = jest.fn();
+  it('calls schedule callback', () => {
+    const onSchedule = jest.fn();
     render(
-      <ServiceCard
-        name="Servicio"
-        image=""
-        price={100}
-        onBook={onBook}
-      />
+      <CartProvider>
+        <ServiceCard
+          id="s1"
+          name="Servicio"
+          icon=""
+          image=""
+          price={100}
+          onSchedule={onSchedule}
+        />
+      </CartProvider>
     );
 
     fireEvent.click(screen.getByText('Agendar'));
-    expect(onBook).toHaveBeenCalled();
+    expect(onSchedule).toHaveBeenCalled();
   });
 });
