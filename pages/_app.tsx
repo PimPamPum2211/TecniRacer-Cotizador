@@ -4,13 +4,16 @@ import { Layout } from '../components/Layout';
 import { QuotesProvider } from '../lib/QuotesContext';
 import { CartProvider } from '../lib/CartContext';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps & { Component: any }) {
+  const { title, description } = Component;
   return (
     <CartProvider>
       <QuotesProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <div className="min-h-screen bg-gradient-radial from-white via-gray-50 to-gray-200 dark:from-slate-900 dark:to-slate-950">
+          <Layout title={title} description={description}>
+            <Component {...pageProps} />
+          </Layout>
+        </div>
       </QuotesProvider>
     </CartProvider>
   );

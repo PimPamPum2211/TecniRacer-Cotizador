@@ -10,12 +10,13 @@
     "test": "jest"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "autoprefixer": "^10.4.14",
+    "lucide-react": "^0.515.0",
     "next": "14.0.0",
     "postcss": "^8.4.31",
     "prisma": "^5.9.1",
@@ -39,6 +40,7 @@
     "node-mocks-http": "^1.11.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.3",
     "typescript": "^5.2.2"
   }
 }

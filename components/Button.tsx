@@ -6,7 +6,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button: React.FC<Props> = ({ children, className = '', ...rest }) => (
   <button
-    className={`px-4 py-2 rounded font-medium transition-colors bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 ${className}`}
+    className={`px-3 py-1 rounded-lg border border-brand-slate bg-white text-brand-neutral hover:bg-brand hover:text-white transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-brand disabled:opacity-50 ${className}`}
     {...rest}
   >
     {children}
