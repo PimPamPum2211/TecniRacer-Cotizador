@@ -55,5 +55,3 @@ export default function Lookup() {
     </div>
   );
 }
-
-Lookup.title = 'Buscar cita';

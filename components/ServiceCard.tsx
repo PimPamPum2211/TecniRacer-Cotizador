@@ -28,7 +28,7 @@ export const ServiceCard: React.FC<Props> = ({
   const hasCart = items.length > 0;
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-md transition transform hover:scale-[1.02] hover:shadow-xl duration-200 ease-in-out">
+    <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
       <div className="relative">
         <img src={image} alt={name} className="w-full h-40 object-cover" />
         <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-full shadow">
@@ -36,16 +36,16 @@ export const ServiceCard: React.FC<Props> = ({
         </div>
       </div>
       <div className="pt-10 pb-6 px-6 text-center">
-        <h3 className="text-2xl font-semibold text-brand-neutral mb-2">{name}</h3>
-        <p className="text-base text-brand-slate">Desde ${price}</p>
+        <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
+        <p className="text-gray-600 mt-1">Desde ${price}</p>
         <div className="mt-4 flex justify-center space-x-2">
           {onQuote && (
-            <Button onClick={onQuote} className="">
+            <Button onClick={onQuote} className="border border-gray-300 text-gray-700 hover:bg-gray-100">
               Cotizar
             </Button>
           )}
           {onSchedule && !hasCart && (
-            <Button onClick={onSchedule} className="bg-brand text-white hover:bg-brand-dark">
+            <Button onClick={onSchedule} className="bg-primary text-white hover:bg-blue-700">
               Agendar
             </Button>
           )}
