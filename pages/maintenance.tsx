@@ -11,7 +11,7 @@ export default function Maintenance() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <main role="main" className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-4">Mantenimientos</h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((s) => (
@@ -26,7 +26,7 @@ export default function Maintenance() {
           />
         ))}
       </div>
-    </div>
+    </main>
   );
 }
 
