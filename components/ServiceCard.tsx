@@ -19,8 +19,8 @@ export const ServiceCard: React.FC<Props> = ({ id, name, icon, image, price, onS
 
   return (
     <motion.div
-      className="bg-white rounded-xl border border-brand-blue/10 flex flex-col items-center aspect-square"
-      whileHover={{ y: -4, boxShadow: '0 10px 20px rgba(0,0,0,.15)' }}
+      className="bg-white rounded-xl border border-brand-blue/10 flex flex-col items-center aspect-square hover:shadow-card"
+      whileHover={{ y: -4 }}
     >
       <div className="w-full aspect-video overflow-hidden rounded-t-xl">
         <img src={image} alt={name} className="w-full h-full object-cover" />
