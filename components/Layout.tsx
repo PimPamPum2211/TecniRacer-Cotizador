@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="min-h-screen flex flex-col">
+  <div className="min-h-screen flex flex-col" suppressHydrationWarning>
     <nav className="bg-blue-600 text-white p-4 flex gap-4">
       <Link href="/" className="font-semibold">Inicio</Link>
       <Link href="/maintenance">Mantenimientos</Link>
