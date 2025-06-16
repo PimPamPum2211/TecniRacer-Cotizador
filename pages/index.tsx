@@ -46,7 +46,7 @@ export default function Home() {
           Limpiar
         </Button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {loading
           ? Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="animate-pulse bg-gray-200 h-40 rounded-2xl" />

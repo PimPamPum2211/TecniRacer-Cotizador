@@ -23,6 +23,9 @@ module.exports = {
       },
       screens: {
         xs: '480px'
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
       }
     },
   },

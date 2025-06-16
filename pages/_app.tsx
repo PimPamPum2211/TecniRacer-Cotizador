@@ -8,9 +8,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <CartProvider>
       <QuotesProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <div className="min-h-screen bg-gradient-radial from-white to-gray-100">
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </div>
       </QuotesProvider>
     </CartProvider>
   );
