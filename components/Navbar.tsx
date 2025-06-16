@@ -5,14 +5,16 @@ import { Sun, Moon, Menu } from 'lucide-react';
 
 export default function Navbar() {
   const router = useRouter();
-  const [dark, setDark] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return (
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const preferred =
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    );
-  });
+        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    setDark(preferred);
+  }, []);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
