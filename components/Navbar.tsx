@@ -1,113 +1,85 @@
 import Link from 'next/link';
-import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { Sun, Moon, Menu, ShoppingCart } from 'lucide-react';
-import { useTheme } from 'next-themes';
-
-const links = [
-  { href: '/', label: 'Inicio' },
-  { href: '/cotizar', label: 'Cotizar' },
-  { href: '/mantenimiento', label: 'Mantenimiento' },
-  { href: '/contacto', label: 'Contacto' }
-];
+import { useEffect, useState } from 'react';
+import { Sun, Moon, Menu } from 'lucide-react';
 
 export default function Navbar() {
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
+  const [dark, setDark] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    );
+  });
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    document.documentElement.classList.toggle('dark', dark);
+    localStorage.theme = dark ? 'dark' : 'light';
+  }, [dark]);
 
-  useEffect(() => {
-    const handleChange = () => setOpen(false);
-    router.events.on('routeChangeComplete', handleChange);
-    return () => router.events.off('routeChangeComplete', handleChange);
-  }, []);
+  const links = [
+    { href: '/', label: 'Inicio' },
+    { href: '/cotizar', label: 'Cotizar' },
+    { href: '/mantenimiento', label: 'Mantenimiento' },
+    { href: '/contacto', label: 'Contacto' },
+  ];
 
-  const toggleTheme = useCallback(() => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  }, [theme, setTheme]);
-
-  if (!mounted) {
-    return null;
-  }
-
-  const path = router.pathname;
   const linkClass = (href: string) =>
-    path === href ? 'text-brand font-semibold underline' : 'hover:text-brand';
+    `block px-4 py-2 border-b-2 ${
+      router.pathname === href
+        ? 'text-brand border-brand'
+        : 'border-transparent hover:text-brand'
+    }`;
 
   return (
-    <header className="fixed inset-x-0 top-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur z-50">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+    <header className="fixed inset-x-0 top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur shadow z-50">
+      <nav
+        className="max-w-6xl mx-auto flex items-center justify-between p-4"
+        role="navigation"
+        aria-label="Main"
+      >
         <Link href="/" className="text-xl font-bold text-brand">
           TecniRacer
         </Link>
 
-        <nav className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6" role="menu">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} className={linkClass(l.href)}>
+              {l.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => setDark((d) => !d)}
+            className="rounded p-2 border border-brand-slate focus-visible:ring-2 focus-visible:ring-brand"
+            aria-label="Cambiar tema"
+          >
+            {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+          <button onClick={() => setOpen(!open)} className="md:hidden p-2" aria-label="Abrir menú">
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+      </nav>
+      {open && (
+        <div className="md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700" role="menu">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               className={linkClass(l.href)}
-              aria-current={path === l.href ? 'page' : undefined}
+              onClick={() => setOpen(false)}
             >
               {l.label}
             </Link>
           ))}
-        </nav>
-
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={toggleTheme}
-            aria-label="Cambiar tema"
-            className="p-2 rounded focus:ring-2"
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-5 h-5" />
-            ) : (
-              <Moon className="w-5 h-5" />
-            )}
-          </button>
-          <Link href="/cart" className="hidden md:block p-2" aria-label="Carrito">
-            <ShoppingCart className="w-6 h-6" />
-          </Link>
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden p-2"
-            aria-label="Menú"
-            aria-expanded={open}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
         </div>
-      </div>
-
-      <nav
-        className={`md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 transform transition-transform origin-top ${open ? 'scale-y-100' : 'scale-y-0'} max-h-[calc(100vh-4rem)] overflow-y-auto`}
-        aria-hidden={!open}
-      >
-        {links.map((l) => (
-          <Link
-            key={l.href}
-            href={l.href}
-            onClick={() => setOpen(false)}
-            className={`block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-800 ${path === l.href ? 'text-brand' : ''}`}
-            aria-current={path === l.href ? 'page' : undefined}
-          >
-            {l.label}
-          </Link>
-        ))}
-        <Link
-          href="/cart"
-          onClick={() => setOpen(false)}
-          className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-800"
-        >
-          Carrito
-        </Link>
-      </nav>
+      )}
     </header>
   );
 }
