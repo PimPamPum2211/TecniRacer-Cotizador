@@ -12,7 +12,7 @@ module.exports = {
         'brand-blue': '#003E7E',
       },
       gridTemplateColumns: {
-        mosaic: 'repeat(auto-fill, minmax(200px,1fr))',
+        mosaic: 'repeat(auto-fill, minmax(180px,1fr))',
       },
     },
   },
