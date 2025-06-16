@@ -63,7 +63,7 @@ export const AppointmentForm: React.FC<Props> = ({ serviceId, onSuccess }) => {
         required
       />
       {errors && <p className="text-red-600 text-sm">{errors}</p>}
-      <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">
+      <Button type="submit" variant="secondary" className="w-full">
         Agendar
       </Button>
     </form>

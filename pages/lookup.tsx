@@ -40,7 +40,7 @@ export default function Lookup() {
           onChange={(e) => setDocument(e.target.value)}
           required
         />
-        <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">
+        <Button type="submit" variant="secondary" className="w-full">
           Buscar
         </Button>
       </form>

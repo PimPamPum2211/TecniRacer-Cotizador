@@ -34,7 +34,7 @@ export const ServiceCard: React.FC<Props> = ({ id, name, icon, image, price, onS
             Agendar
           </Button>
         )}
-        <Button onClick={() => addItem({ id, name, price })} className="bg-orange-600 hover:bg-orange-700">
+        <Button onClick={() => addItem({ id, name, price })} variant="secondary">
           Agregar
         </Button>
       </div>
