@@ -10,11 +10,7 @@ interface Props {
 export const QuoteModal: React.FC<Props> = ({ visible, price, onClose }) => {
   if (!visible) return null;
   return (
-    <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center"
-      aria-modal="true"
-      role="dialog"
-    >
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
       <div className="bg-white p-6 rounded-xl shadow w-80">
         <h2 className="text-lg font-semibold mb-4">Cotización</h2>
         <ol className="flex justify-between mb-4 text-sm">
