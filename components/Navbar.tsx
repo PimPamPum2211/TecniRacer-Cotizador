@@ -1,21 +1,27 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Sun, Moon, Menu } from 'lucide-react';
+import { Sun, Moon, Menu, ShoppingCart } from 'lucide-react';
 
 export default function Navbar() {
-  const router = useRouter();
   const [dark, setDark] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    const ls = localStorage.getItem('theme');
     const preferred =
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
+      ls === 'dark' ||
+      (!ls && window.matchMedia('(prefers-color-scheme: dark)').matches);
     setDark(preferred);
+    document.documentElement.classList.toggle('dark', preferred);
   }, []);
-  const [open, setOpen] = useState(false);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
@@ -29,58 +35,58 @@ export default function Navbar() {
     { href: '/contacto', label: 'Contacto' },
   ];
 
-  const linkClass = (href: string) =>
-    `block px-4 py-2 border-b-2 ${
-      router.pathname === href
-        ? 'text-brand border-brand'
-        : 'border-transparent hover:text-brand'
-    }`;
-
   return (
-    <header className="fixed inset-x-0 top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur shadow z-50">
-      <nav
-        className="max-w-6xl mx-auto flex items-center justify-between p-4"
-        role="navigation"
-        aria-label="Main"
-      >
+    <header className="fixed inset-x-0 top-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur z-50">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <Link href="/" className="text-xl font-bold text-brand">
           TecniRacer
         </Link>
 
-        <div className="hidden md:flex space-x-6" role="menu">
+        <nav className="hidden md:flex space-x-6">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className={linkClass(l.href)}>
+            <Link key={l.href} href={l.href} className="hover:text-brand">
               {l.label}
             </Link>
           ))}
-        </div>
+        </nav>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
           <button
-            onClick={() => setDark((d) => !d)}
-            className="rounded p-2 border border-brand-slate focus-visible:ring-2 focus-visible:ring-brand"
+            onClick={toggleTheme}
             aria-label="Cambiar tema"
+            className="p-2 rounded focus:ring-2"
           >
             {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          <button onClick={() => setOpen(!open)} className="md:hidden p-2" aria-label="Abrir menú">
+          <Link href="/cart" className="hidden md:block p-2" aria-label="Carrito">
+            <ShoppingCart className="w-6 h-6" />
+          </Link>
+          <button onClick={() => setOpen(!open)} className="md:hidden p-2" aria-label="Menú">
             <Menu className="w-6 h-6" />
           </button>
         </div>
-      </nav>
+      </div>
+
       {open && (
-        <div className="md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700" role="menu">
+        <nav className="md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={linkClass(l.href)}
               onClick={() => setOpen(false)}
+              className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-800"
             >
               {l.label}
             </Link>
           ))}
-        </div>
+          <Link
+            href="/cart"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-slate-800"
+          >
+            Carrito
+          </Link>
+        </nav>
       )}
     </header>
   );
