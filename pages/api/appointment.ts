@@ -9,10 +9,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     const appointment = await prisma.appointment.findFirst({
       where: { plate, document },
-      include: { service: true }
+      include: { service: true, customer: true }
     });
     if (!appointment) return res.status(404).end();
-    return res.json(appointment);
+    const { customer, ...rest } = appointment;
+    return res.json({ ...rest, customer: customer.name, phone: customer.phone });
   }
 
   if (req.method !== 'POST') return res.status(405).end();
@@ -42,9 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const appointment = await prisma.appointment.create({
     data: {
       serviceId,
-      customer,
       customerId: customerRecord.id,
-      phone,
       plate,
       document,
       scheduled: new Date(scheduled)

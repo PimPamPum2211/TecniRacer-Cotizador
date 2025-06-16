@@ -23,7 +23,17 @@ describe('/api/appointment', () => {
   });
 
   it('GET returns appointment', async () => {
-    prisma.appointment.findFirst.mockResolvedValue({ id: 'a1' });
+    prisma.appointment.findFirst.mockResolvedValue({
+      id: 'a1',
+      serviceId: 's1',
+      customerId: 'c1',
+      plate: 'ABC',
+      document: '123',
+      scheduled: new Date(),
+      createdAt: new Date(),
+      service: {},
+      customer: { name: 'Test', phone: '5551234' }
+    });
     const { req, res } = createMocks({ method: 'GET', query: { plate: 'ABC', document: '123' } });
     await handler(req as any, res as any);
     expect(res._getStatusCode()).toBe(200);
