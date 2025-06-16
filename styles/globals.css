@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .input {
+    @apply w-full rounded-lg border px-3 py-2 text-sm focus:border-primary focus:outline-none;
+  }
+  .btn-primary {
+    @apply rounded-lg bg-primary px-4 py-2 font-medium text-white hover:bg-primary/90 disabled:opacity-60;
+  }
+  .btn-outline {
+    @apply rounded-lg border px-2 py-1 text-sm font-medium text-slate-700 hover:bg-slate-100;
+  }
+}
