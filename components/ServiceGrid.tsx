@@ -1,5 +1,6 @@
 import React from 'react';
 import { ServiceCard } from './ServiceCard';
+import { EmptyState } from './EmptyState';
 
 export interface Service {
   id: string;
@@ -18,19 +19,23 @@ interface Props {
 export const ServiceGrid: React.FC<Props> = ({ title, services, onSchedule }) => (
   <div>
     {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
-    <div className="grid grid-cols-mosaic gap-6">
-      {services.map((s) => (
-        <ServiceCard
-          key={s.id}
-          id={s.id}
-          name={s.name}
-          icon={s.icon}
-          image={s.image}
-          price={s.basePrice}
-          onSchedule={() => onSchedule(s.id)}
-        />
-      ))}
-    </div>
+    {services.length === 0 ? (
+      <EmptyState message="No hay servicios disponibles" />
+    ) : (
+      <div className="grid grid-cols-mosaic gap-6">
+        {services.map((s) => (
+          <ServiceCard
+            key={s.id}
+            id={s.id}
+            name={s.name}
+            icon={s.icon}
+            image={s.image}
+            price={s.basePrice}
+            onSchedule={() => onSchedule(s.id)}
+          />
+        ))}
+      </div>
+    )}
   </div>
 );
 
