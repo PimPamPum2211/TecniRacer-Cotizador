@@ -5,7 +5,15 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'brand-red': '#C8102E',
+        'brand-blue': '#003E7E',
+      },
+      gridTemplateColumns: {
+        mosaic: 'repeat(auto-fill, minmax(260px,1fr))',
+      },
+    },
   },
   plugins: [require('@tailwindcss/aspect-ratio')],
 };

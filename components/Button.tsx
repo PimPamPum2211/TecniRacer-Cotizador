@@ -2,13 +2,17 @@ import React from 'react';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  variant?: 'primary';
 }
 
-export const Button: React.FC<Props> = ({ children, className = '', ...rest }) => (
-  <button
-    className={`px-4 py-2 rounded font-medium transition-colors bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 ${className}`}
-    {...rest}
-  >
-    {children}
-  </button>
-);
+export const Button: React.FC<Props> = ({ children, variant, className = '', ...rest }) => {
+  const variantClass = variant === 'primary' ? 'bg-brand-red text-white hover:bg-brand-red/90' : '';
+  return (
+    <button
+      className={`px-4 py-2 rounded font-medium transition-colors disabled:opacity-50 ${variantClass} ${className}`}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+};
