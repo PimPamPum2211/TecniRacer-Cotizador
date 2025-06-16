@@ -16,9 +16,11 @@ interface Props {
 }
 
 export const ServiceGrid: React.FC<Props> = ({ title, services, onSchedule }) => (
-  <div>
-    {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
-    <div className="grid grid-cols-mosaic gap-6">
+  <section className="space-y-8">
+    {title && (
+      <h2 className="text-2xl font-semibold text-brand-blue">{title}</h2>
+    )}
+    <div className="grid w-full grid-cols-mosaic gap-6">
       {services.map((s) => (
         <ServiceCard
           key={s.id}
@@ -31,6 +33,6 @@ export const ServiceGrid: React.FC<Props> = ({ title, services, onSchedule }) =>
         />
       ))}
     </div>
-  </div>
+  </section>
 );
 
