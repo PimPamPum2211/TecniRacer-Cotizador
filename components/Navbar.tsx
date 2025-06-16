@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { Sun, Moon, Menu, ShoppingCart } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 const links = [
   { href: '/', label: 'Inicio' },
@@ -12,45 +13,31 @@ const links = [
 
 export default function Navbar() {
   const router = useRouter();
-  const [dark, setDark] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [path, setPath] = useState('');
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const ls = localStorage.getItem('theme');
-    const preferred =
-      ls === 'dark' ||
-      (!ls && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    setDark(preferred);
-    document.documentElement.classList.toggle('dark', preferred);
-    setPath(window.location.pathname);
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    const handleChange = (url: string) => {
-      setOpen(false);
-      setPath(url);
-    };
+    const handleChange = () => setOpen(false);
     router.events.on('routeChangeComplete', handleChange);
     return () => router.events.off('routeChangeComplete', handleChange);
-  }, [router.events]);
+  }, []);
 
   const toggleTheme = useCallback(() => {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle('dark', next);
-    localStorage.setItem('theme', next ? 'dark' : 'light');
-  }, [dark]);
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  }, [theme, setTheme]);
 
   if (!mounted) {
     return null;
   }
 
+  const path = router.pathname;
   const linkClass = (href: string) =>
-    path === href ? 'text-brand' : 'hover:text-brand';
+    path === href ? 'text-brand font-semibold underline' : 'hover:text-brand';
 
   return (
     <header className="fixed inset-x-0 top-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur z-50">
@@ -78,7 +65,11 @@ export default function Navbar() {
             aria-label="Cambiar tema"
             className="p-2 rounded focus:ring-2"
           >
-            {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            {theme === 'dark' ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
           </button>
           <Link href="/cart" className="hidden md:block p-2" aria-label="Carrito">
             <ShoppingCart className="w-6 h-6" />
@@ -95,7 +86,7 @@ export default function Navbar() {
       </div>
 
       <nav
-        className={`md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 transform transition-transform origin-top ${open ? 'scale-y-100' : 'scale-y-0'}`}
+        className={`md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 transform transition-transform origin-top ${open ? 'scale-y-100' : 'scale-y-0'} max-h-[calc(100vh-4rem)] overflow-y-auto`}
         aria-hidden={!open}
       >
         {links.map((l) => (
