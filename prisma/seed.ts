@@ -4,10 +4,15 @@ import services from '../data/services.json';
 async function main() {
   for (const service of services) {
     await prisma.service.upsert({
-      where: { id: service.id },
-      update: {},
+      where: { slug: service.slug },
+      update: {
+        name: service.name,
+        icon: service.icon,
+        image: service.image,
+        basePrice: service.basePrice,
+      },
       create: {
-        id: service.id,
+        slug: service.slug,
         name: service.name,
         icon: service.icon,
         image: service.image,

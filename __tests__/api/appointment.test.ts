@@ -1,17 +1,22 @@
 import handler from '../../pages/api/appointment';
 import { createMocks } from 'node-mocks-http';
 
-jest.mock('../../lib/prisma', () => ({
-  prisma: {
+jest.mock('../../lib/prisma', () => {
+  const mock = {
     appointment: {
       findFirst: jest.fn(),
-      create: jest.fn(async ({ data }) => ({ id: 'a1' }))
+      create: jest.fn(async () => ({ id: 'a1' }))
     },
     customer: {
       upsert: jest.fn(async () => ({ id: 'c1' }))
-    }
-  }
-}));
+    },
+    service: {
+      findUnique: jest.fn(async () => ({ id: 'srv1' }))
+    },
+    $transaction: jest.fn(async (cb) => cb(mock))
+  };
+  return { prisma: mock };
+});
 
 const { prisma } = require('../../lib/prisma');
 
@@ -32,7 +37,7 @@ describe('/api/appointment', () => {
   it('POST creates appointment', async () => {
     const { req, res } = createMocks({
       method: 'POST',
-      body: { serviceId: 's1', customer: 'test', phone: '5551234', plate: 'ABC', document: '123', scheduled: '2024-01-01T10:00' }
+      body: { serviceId: 'oil-change', customer: 'test', phone: '5551234', plate: 'ABC', document: '123', scheduled: '2099-01-01T10:00' }
     });
     await handler(req as any, res as any);
     expect(res._getStatusCode()).toBe(200);

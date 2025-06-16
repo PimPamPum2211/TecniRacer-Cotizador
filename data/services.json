@@ -1,6 +1,6 @@
 [
   {
-    "id": "oil-change",
+    "slug": "oil-change",
     "name": "Cambio de Aceite",
     "icon": "/icons/oil.svg",
     "image": "/images/oil-change.svg",
@@ -8,7 +8,7 @@
     "category": "Mantenimientos"
   },
   {
-    "id": "tire-rotation",
+    "slug": "tire-rotation",
     "name": "Rotación de Llantas",
     "icon": "/icons/tires.svg",
     "image": "/images/tire-rotation.svg",
@@ -16,7 +16,7 @@
     "category": "Mantenimientos"
   },
   {
-    "id": "brake-inspection",
+    "slug": "brake-inspection",
     "name": "Revisión de Frenos",
     "icon": "/icons/brakes.svg",
     "image": "/images/brake-inspection.svg",
@@ -24,7 +24,7 @@
     "category": "Mantenimientos"
   },
   {
-    "id": "battery-replacement",
+    "slug": "battery-replacement",
     "name": "Cambio de Batería",
     "icon": "/icons/battery.svg",
     "image": "/images/battery-replacement.svg",
@@ -32,7 +32,7 @@
     "category": "Mantenimientos"
   },
   {
-    "id": "air-filter",
+    "slug": "air-filter",
     "name": "Reemplazo de Filtro de Aire",
     "icon": "/icons/filter.svg",
     "image": "/images/air-filter-replacement.svg",
@@ -40,7 +40,7 @@
     "category": "Mantenimientos"
   },
   {
-    "id": "engine-diagnosis",
+    "slug": "engine-diagnosis",
     "name": "Diagnóstico de Motor",
     "icon": "/icons/engine.svg",
     "image": "/images/engine-diagnosis.svg",
@@ -48,7 +48,7 @@
     "category": "Diagnóstico"
   },
   {
-    "id": "transmission-service",
+    "slug": "transmission-service",
     "name": "Servicio de Transmisión",
     "icon": "/icons/transmission.svg",
     "image": "/images/transmission-service.svg",
@@ -56,7 +56,7 @@
     "category": "Mantenimientos"
   },
   {
-    "id": "coolant-flush",
+    "slug": "coolant-flush",
     "name": "Cambio de Anticongelante",
     "icon": "/icons/coolant.svg",
     "image": "/images/coolant-flush.svg",
@@ -64,7 +64,7 @@
     "category": "Mantenimientos"
   },
   {
-    "id": "wheel-alignment",
+    "slug": "wheel-alignment",
     "name": "Alineación de Ruedas",
     "icon": "/icons/alignment.svg",
     "image": "/images/wheel-alignment.svg",
@@ -72,7 +72,7 @@
     "category": "Diagnóstico"
   },
   {
-    "id": "suspension-check",
+    "slug": "suspension-check",
     "name": "Inspección de Suspensión",
     "icon": "/icons/suspension.svg",
     "image": "/images/suspension-check.svg",

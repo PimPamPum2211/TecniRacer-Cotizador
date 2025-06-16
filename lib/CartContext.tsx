@@ -25,6 +25,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const stored = localStorage.getItem('cart');
     if (stored) {
       try {
@@ -36,6 +37,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 

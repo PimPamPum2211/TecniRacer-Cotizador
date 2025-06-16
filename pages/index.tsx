@@ -11,8 +11,8 @@ export default function Home() {
   const [activeCat, setActiveCat] = useState(categories[0]);
   const router = useRouter();
 
-  const schedule = (id: string) => {
-    router.push(`/vehicle?serviceId=${id}`);
+  const schedule = (slug: string) => {
+    router.push(`/vehicle?serviceId=${slug}`);
   };
 
   return (
@@ -22,14 +22,14 @@ export default function Home() {
         {services
           .filter((s) => s.category === activeCat)
           .map((s) => (
-          <div key={s.id} className="w-60 sm:w-72">
+          <div key={s.slug} className="w-60 sm:w-72">
             <ServiceCard
-              id={s.id}
+              id={s.slug}
               name={s.name}
               icon={s.icon}
               image={s.image}
               price={s.basePrice}
-              onSchedule={() => schedule(s.id)}
+              onSchedule={() => schedule(s.slug)}
             />
           </div>
         ))}

@@ -26,10 +26,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const schema = z.object({
     serviceId: z.string(),
     customer: z.string(),
-    phone: z.string().regex(/^[0-9]{7,}$/),
+    phone: z.string().regex(/^\d{7,10}$/),
     plate: z.string(),
     document: z.string(),
-    scheduled: z.string()
+    scheduled: z
+      .string()
+      .pipe(z.coerce.date())
+      .refine((d) => d > new Date(), { message: 'Debe ser futura' })
   });
 
   const parsed = schema.safeParse(req.body);
@@ -40,22 +43,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { serviceId, customer, phone, plate, document, scheduled } = parsed.data;
 
   try {
-    const customerRecord = await prisma.customer.upsert({
-      where: { phone },
-      update: { name: customer },
-      create: { name: customer, phone }
-    });
+    const service = await prisma.service.findUnique({ where: { slug: serviceId } });
+    if (!service) return res.status(404).json({ error: 'Service not found' });
 
-    const appointment = await prisma.appointment.create({
-      data: {
-        serviceId,
-        customer,
-        customerId: customerRecord.id,
-        phone,
-        plate,
-        document,
-        scheduled: new Date(scheduled)
-      }
+    const appointment = await prisma.$transaction(async (tx) => {
+      const customerRecord = await tx.customer.upsert({
+        where: { phone },
+        update: { name: customer },
+        create: { name: customer, phone }
+      });
+
+      return tx.appointment.create({
+        data: {
+          serviceId: service.id,
+          customer,
+          customerId: customerRecord.id,
+          phone,
+          plate,
+          document,
+          scheduled
+        }
+      });
     });
     res.json({ appointmentId: appointment.id });
   } catch (e) {

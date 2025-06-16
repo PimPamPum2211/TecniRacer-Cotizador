@@ -6,8 +6,8 @@ export default function Maintenance() {
   const router = useRouter();
   const items = services.filter((s) => s.category === 'Mantenimientos');
 
-  const schedule = (id: string) => {
-    router.push(`/vehicle?serviceId=${id}`);
+  const schedule = (slug: string) => {
+    router.push(`/vehicle?serviceId=${slug}`);
   };
 
   return (
@@ -16,13 +16,13 @@ export default function Maintenance() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((s) => (
           <ServiceCard
-            key={s.id}
-            id={s.id}
+            key={s.slug}
+            id={s.slug}
             name={s.name}
             icon={s.icon}
             image={s.image}
             price={s.basePrice}
-            onSchedule={() => schedule(s.id)}
+            onSchedule={() => schedule(s.slug)}
           />
         ))}
       </div>

@@ -8,7 +8,7 @@ describe('ServiceCard', () => {
     render(
       <CartProvider>
         <ServiceCard
-          id="s1"
+          id="oil-change"
           name="Servicio"
           icon=""
           image=""

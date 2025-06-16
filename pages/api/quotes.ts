@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     quotes.map((q) => ({
       id: q.id,
       serviceId: q.serviceId,
-      price: q.price,
+      price: Number(q.price),
       createdAt: q.createdAt,
       serviceName: q.service.name,
       customer: q.customer ? q.customer.name : null

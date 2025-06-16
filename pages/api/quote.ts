@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import services from '../../data/services.json';
 import { prisma } from '../../lib/prisma';
 import { z } from 'zod';
 
@@ -19,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { serviceId, name, phone } = parsed.data;
 
-  const service = services.find((s) => s.id === serviceId);
+  const service = await prisma.service.findUnique({ where: { slug: serviceId } });
   if (!service) return res.status(404).end();
 
   try {
@@ -34,9 +33,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const quote = await prisma.quote.create({
-      data: { serviceId, price: service.basePrice, customerId }
+      data: { serviceId: service.id, price: service.basePrice, customerId }
     });
-    res.json({ quoteId: quote.id, price: quote.price });
+    res.json({ quoteId: quote.id, price: Number(quote.price) });
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Internal error' });

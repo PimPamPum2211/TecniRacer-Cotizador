@@ -2,16 +2,21 @@ import handler from '../../pages/api/quote';
 import { createMocks } from 'node-mocks-http';
 import services from '../../data/services.json';
 
-jest.mock('../../lib/prisma', () => ({
-  prisma: {
+jest.mock('../../lib/prisma', () => {
+  const data = require('../../data/services.json');
+  const mock = {
     quote: {
       create: jest.fn(async ({ data }) => ({ id: 'q1', price: data.price }))
     },
     customer: {
       upsert: jest.fn()
+    },
+    service: {
+      findUnique: jest.fn(async () => ({ id: 'srv1', basePrice: data[0].basePrice }))
     }
-  }
-}));
+  };
+  return { prisma: mock };
+});
 
 describe('POST /api/quote', () => {
   it('returns 400 when serviceId is missing', async () => {
@@ -23,7 +28,7 @@ describe('POST /api/quote', () => {
   it('creates quote and returns price', async () => {
     const { req, res } = createMocks({
       method: 'POST',
-      body: { serviceId: services[0].id }
+      body: { serviceId: services[0].slug }
     });
     await handler(req as any, res as any);
     expect(res._getStatusCode()).toBe(200);
