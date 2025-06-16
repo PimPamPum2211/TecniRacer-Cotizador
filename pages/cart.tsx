@@ -21,7 +21,7 @@ export default function Cart() {
               <p className="font-medium">{it.name}</p>
               <p className="text-sm text-gray-600">${it.price}</p>
             </div>
-            <Button onClick={() => removeItem(it.id)} className="bg-red-600 hover:bg-red-700">
+            <Button onClick={() => removeItem(it.id)} variant="primary">
               Eliminar
             </Button>
           </li>
@@ -30,7 +30,7 @@ export default function Cart() {
       <p className="mt-4 font-semibold">Total: ${total}</p>
       <div className="mt-4 flex gap-2">
         <Button
-          className="bg-green-600 hover:bg-green-700"
+          variant="secondary"
           onClick={() => router.push('/vehicle?cart=1')}
         >
           Pagar

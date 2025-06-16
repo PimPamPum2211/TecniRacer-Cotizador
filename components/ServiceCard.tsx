@@ -30,7 +30,7 @@ export const ServiceCard: React.FC<Props> = ({ id, name, icon, image, price, onS
       <p className="text-sm mb-2">{`Desde $${price}`}</p>
       <div className="flex gap-2 mt-auto pb-2 flex-wrap justify-center">
         {!hasCart && (
-          <Button onClick={onSchedule} className="bg-green-600 hover:bg-green-700">
+          <Button onClick={onSchedule} variant="secondary">
             Agendar
           </Button>
         )}

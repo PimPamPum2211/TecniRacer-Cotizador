@@ -91,7 +91,7 @@ export default function Vehicle() {
           required
         />
         {error && <p className="text-red-600 text-sm">{error}</p>}
-        <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">
+        <Button type="submit" variant="secondary" className="w-full">
           Enviar
         </Button>
       </form>
