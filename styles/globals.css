@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary: #1e3a8a;
+  --secondary: #047857;
+  --gray-soft: #f3f4f6;
+}
+
+body {
+  @apply font-sans;
+}
