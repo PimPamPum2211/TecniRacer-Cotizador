@@ -21,7 +21,7 @@ export const QuoteModal: React.FC<Props> = ({ visible, price, onClose }) => {
           {price !== null ? `El precio es $${price}` : 'Calculando...'}
         </p>
         <div className="text-center">
-          <Button onClick={onClose}>Cerrar</Button>
+          <Button onClick={onClose} variant="primary">Cerrar</Button>
         </div>
       </div>
     </div>
