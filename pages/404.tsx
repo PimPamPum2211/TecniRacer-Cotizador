@@ -13,3 +13,5 @@ export default function Custom404() {
     </Layout>
   );
 }
+
+Custom404.title = 'Página no encontrada';

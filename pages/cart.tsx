@@ -67,3 +67,5 @@ export default function Cart() {
     </div>
   );
 }
+
+Cart.title = 'Carrito';

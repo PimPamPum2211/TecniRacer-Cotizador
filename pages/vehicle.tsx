@@ -98,3 +98,5 @@ export default function Vehicle() {
     </div>
   );
 }
+
+Vehicle.title = 'Datos del Vehículo';

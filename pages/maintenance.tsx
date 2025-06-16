@@ -29,3 +29,5 @@ export default function Maintenance() {
     </div>
   );
 }
+
+Maintenance.title = 'Mantenimientos';

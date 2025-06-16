@@ -31,3 +31,5 @@ export default function History() {
     </div>
   );
 }
+
+History.title = 'Historial';
