@@ -13,28 +13,38 @@ export default function Vehicle() {
   const [plate, setPlate] = useState('');
   const [document, setDocument] = useState('');
   const [scheduled, setScheduled] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const targets = serviceId ? [{ id: serviceId as string }] : items;
-    await Promise.all(
-      targets.map((s) =>
-        fetch('/api/appointment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            serviceId: s.id,
-            customer,
-            phone,
-            plate,
-            document,
-            scheduled
+    try {
+      const responses = await Promise.all(
+        targets.map((s) =>
+          fetch('/api/appointment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              serviceId: s.id,
+              customer,
+              phone,
+              plate,
+              document,
+              scheduled
+            })
           })
-        })
-      )
-    );
-    clear();
-    router.push('/history');
+        )
+      );
+      if (responses.every((r) => r.ok)) {
+        clear();
+        router.push('/history');
+      } else {
+        setError('Error al enviar los datos');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Error al enviar los datos');
+    }
   };
 
   return (
@@ -80,6 +90,7 @@ export default function Vehicle() {
           onChange={(e) => setScheduled(e.target.value)}
           required
         />
+        {error && <p className="text-red-600 text-sm">{error}</p>}
         <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">
           Enviar
         </Button>

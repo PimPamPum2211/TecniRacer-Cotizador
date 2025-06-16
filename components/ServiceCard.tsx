@@ -19,9 +19,9 @@ export const ServiceCard: React.FC<Props> = ({ id, name, icon, image, price, onS
   return (
     <div className="bg-white rounded-xl shadow hover:shadow-md transition flex flex-col items-center">
       <div className="w-full aspect-video overflow-hidden rounded-t-xl">
-        <img src={image} alt="" className="w-full h-full object-cover" />
+        <img src={image} alt={name} className="w-full h-full object-cover" />
       </div>
-      <img src={icon} alt="" className="w-12 h-12 -mt-6 bg-white rounded-full p-2 shadow" />
+      <img src={icon} alt={name} className="w-12 h-12 -mt-6 bg-white rounded-full p-2 shadow" />
       <h3 className="font-semibold mt-2 text-center">{name}</h3>
       <p className="text-sm mb-2">{`Desde $${price}`}</p>
       <div className="flex gap-2 mt-auto pb-2 flex-wrap justify-center">

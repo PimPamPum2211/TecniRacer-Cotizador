@@ -20,12 +20,21 @@ export const AppointmentForm: React.FC<Props> = ({ serviceId, onSuccess }) => {
       return;
     }
     setErrors(null);
-    await fetch('/api/appointment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ serviceId, customer, phone, scheduled })
-    });
-    onSuccess();
+    try {
+      const res = await fetch('/api/appointment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ serviceId, customer, phone, scheduled })
+      });
+      if (!res.ok) {
+        setErrors('Error al agendar');
+        return;
+      }
+      onSuccess();
+    } catch (err) {
+      console.error(err);
+      setErrors('Error al agendar');
+    }
   };
 
   return (
